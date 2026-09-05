@@ -1,0 +1,19 @@
+# Sanitized reference snippet for the bathroom entity.
+# Preserve existing automations only after validating their device IDs.
+- id: bathroom-night-dimming-example
+  alias: Bathroom night dimming (example)
+  triggers:
+    - trigger: state
+      entity_id: light.lazienka
+      to: 'on'
+  conditions:
+    - condition: time
+      after: '00:00:10'
+      before: '06:59:00'
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.lazienka
+      data:
+        brightness_pct: 1
+  mode: single

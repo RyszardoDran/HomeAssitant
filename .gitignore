@@ -1,0 +1,25 @@
+# Home Assistant and Zigbee2MQTT runtime data
+secrets.yaml
+**/secrets.yaml
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.log.*
+*.backup.*
+*.bak
+**/backup/
+**/backups/
+**/.storage/
+**/media/
+**/tts/
+
+# Mosquitto runtime data and credentials
+mosquitto/data/
+mosquitto/log/
+mosquitto/config/passwd
+mosquitto/config/acl
+
+# Local/editor files
+.vscode/
+.DS_Store

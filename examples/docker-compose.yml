@@ -1,0 +1,46 @@
+# Sanitized reference compose file. Adapt the USB device path to the host.
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: mosquitto
+    restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
+    volumes:
+      - /srv/homeassistant/mosquitto/config:/mosquitto/config
+      - /srv/homeassistant/mosquitto/data:/mosquitto/data
+      - /srv/homeassistant/mosquitto/log:/mosquitto/log
+
+  zigbee2mqtt:
+    image: koenkk/zigbee2mqtt:latest
+    container_name: zigbee2mqtt
+    restart: unless-stopped
+    security_opt:
+      - seccomp=unconfined
+    depends_on:
+      - mosquitto
+    environment:
+      - TZ=Europe/Warsaw
+    ports:
+      - 8080:8080
+    volumes:
+      - /srv/homeassistant/zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
+    devices:
+      - /dev/serial/by-id/REPLACE_WITH_COORDINATOR:/dev/ttyUSB0
+
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+    security_opt:
+      - seccomp=unconfined
+    environment:
+      - TZ=Europe/Warsaw
+    volumes:
+      - /srv/homeassistant/config:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8123:8123

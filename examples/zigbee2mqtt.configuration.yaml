@@ -1,0 +1,23 @@
+# Sanitized reference configuration.
+# Copy the relevant settings into /srv/homeassistant/zigbee2mqtt/configuration.yaml.
+# Do not commit runtime state, credentials, or database files.
+homeassistant:
+  enabled: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://172.18.0.2:1883
+serial:
+  port: /dev/ttyUSB0
+  adapter: ezsp
+external_converters:
+  - moes_zm105m_dimmer.js
+frontend:
+  enabled: true
+  port: 8080
+permit_join: true
+advanced:
+  log_level: debug
+version: 4
+devices:
+  "0x4c5bb3fffe2f0f7e":
+    friendly_name: Łazienka

@@ -1,0 +1,32 @@
+# Sanitized reference configuration.
+# Keep the real Supla token in /srv/homeassistant/config/secrets.yaml.
+default_config:
+frontend:
+  themes: !include_dir_merge_named themes
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+supla:
+  servers:
+    - server: svr27.supla.org
+      access_token: !secret supla_token
+
+template:
+  - light:
+      - name: Łazienka
+        unique_id: template_light_lazienka
+        optimistic: true
+        state: "{{ is_state('light.lazienka_2', 'on') }}"
+        turn_on:
+          - action: light.turn_on
+            target:
+              entity_id: light.lazienka_2
+        turn_off:
+          - action: light.turn_off
+            target:
+              entity_id: light.lazienka_2
+
+input_button:
+  wylacz_swiatla_za_2_min:
+    name: Wyłącz światła (2 min)
