@@ -6,7 +6,8 @@
     - trigger: state
       entity_id: light.lazienka
       to: 'on'
-      for: "00:00:01"
+      for:
+        milliseconds: 200
   conditions:
     - condition: time
       after: '00:00:10'

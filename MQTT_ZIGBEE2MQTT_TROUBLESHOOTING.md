@@ -300,10 +300,11 @@ triggers:
   - trigger: state
     entity_id: light.lazienka
     to: 'on'
-    for: "00:00:01"
+    for:
+      milliseconds: 200
 ```
 
-The `for` condition filters the automation trigger; it does not prevent a physical relay or a direct integration command from changing state. Use the integration or device firmware settings when the relay itself must ignore electrical contact bounce. The corridor currently has no Home Assistant automation trigger in this installation, so its source event must be identified before adding an equivalent filter.
+The `for` condition filters the automation trigger; impulses shorter than 200 milliseconds do not trigger the automation. It does not prevent a physical relay or a direct integration command from changing state. Use the integration or device firmware settings when the relay itself must ignore electrical contact bounce. The corridor currently has no Home Assistant automation trigger in this installation, so its source event must be identified before adding an equivalent filter.
 
 Find stale device references:
 
