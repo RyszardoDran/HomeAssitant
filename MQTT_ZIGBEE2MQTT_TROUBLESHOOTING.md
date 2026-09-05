@@ -291,6 +291,20 @@ If entity names are changed in the future, update the dashboard and all automati
 
 ## Step 7: Check automations
 
+### Ignore very short ON pulses
+
+If a bathroom ON event may be caused by contact bounce or a transient message, require the state to remain ON before an automation reacts:
+
+```yaml
+triggers:
+  - trigger: state
+    entity_id: light.lazienka
+    to: 'on'
+    for: "00:00:01"
+```
+
+The `for` condition filters the automation trigger; it does not prevent a physical relay or a direct integration command from changing state. Use the integration or device firmware settings when the relay itself must ignore electrical contact bounce. The corridor currently has no Home Assistant automation trigger in this installation, so its source event must be identified before adding an equivalent filter.
+
 Find stale device references:
 
 ```bash
