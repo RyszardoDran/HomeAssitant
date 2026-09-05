@@ -7,6 +7,7 @@ This repository stores the reproducible, sanitized parts of the Raspberry Pi rep
 - [MQTT_ZIGBEE2MQTT_TROUBLESHOOTING.md](MQTT_ZIGBEE2MQTT_TROUBLESHOOTING.md) — complete recovery guide.
 - `external_converters/moes_zm105m_dimmer.js` — working Zigbee2MQTT external converter.
 - `examples/` — sanitized reference configurations; replace host-specific paths and never add secrets.
+- The live configuration also contains a 100 ms state watchdog for the bathroom and hallway.
 
 ## Important paths on the Raspberry Pi
 

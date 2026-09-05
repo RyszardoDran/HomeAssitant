@@ -301,10 +301,12 @@ triggers:
     entity_id: light.lazienka
     to: 'on'
     for:
-      milliseconds: 200
+      milliseconds: 100
 ```
 
-The `for` condition filters the automation trigger; impulses shorter than 200 milliseconds do not trigger the automation. It does not prevent a physical relay or a direct integration command from changing state. Use the integration or device firmware settings when the relay itself must ignore electrical contact bounce. The corridor currently has no Home Assistant automation trigger in this installation, so its source event must be identified before adding an equivalent filter.
+The `for` condition filters the automation trigger; impulses shorter than 100 milliseconds do not trigger the automation. It does not prevent a physical relay or a direct integration command from changing state. Use the integration or device firmware settings when the relay itself must ignore electrical contact bounce. The corridor currently has no Home Assistant automation trigger in this installation, so its source event must be identified before adding an equivalent filter.
+
+The installation also uses a watchdog with stable-state helpers for `light.lazienka_2` and `switch.korytarz`. It waits 100 milliseconds after a state change, records stable states, and can restore the previous stable state when a monitored transition is unstable. This is a software recovery layer; it cannot prevent the relay from physically moving before Home Assistant receives the state update.
 
 Find stale device references:
 
